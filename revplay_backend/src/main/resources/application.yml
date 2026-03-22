@@ -69,6 +69,14 @@ file:
   storage:
     type: ${FILE_STORAGE_TYPE:local}
 
+# Bound by AwsProperties; use IAM role on EC2 with empty keys, or set env vars.
+aws:
+  accessKey: ${AWS_ACCESS_KEY_ID:}
+  secretKey: ${AWS_SECRET_ACCESS_KEY:}
+  region: ${AWS_REGION:ap-south-1}
+  s3:
+    bucket: ${AWS_S3_BUCKET:}
+
 ai:
   provider: grok
   api-key: ${XAI_API_KEY:}
