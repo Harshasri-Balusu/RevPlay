@@ -44,7 +44,7 @@ pipeline {
                     sh '''
                     scp -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no target/musicplatform-0.0.1-SNAPSHOT.jar ubuntu@3.7.137.29:/home/ubuntu/
                     ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "pkill -f 'java -jar.*[m]usicplatform' || true"
-                    ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "nohup java -jar /home/ubuntu/musicplatform-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
+                    ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "nohup java -Dspring.profiles.active=prod -jar /home/ubuntu/musicplatform-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
                     '''
                 }
             }
