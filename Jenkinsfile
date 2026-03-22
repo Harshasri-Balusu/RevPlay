@@ -42,11 +42,8 @@ pipeline {
             steps {
                 dir('revplay_backend') {
                     sh '''
-                    # Deploy to Instance 1
                     scp -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no target/musicplatform-0.0.1-SNAPSHOT.jar ubuntu@3.7.137.29:/home/ubuntu/
                     ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "sudo systemctl restart revplay"
-
-                
                     '''
                 }
             }
