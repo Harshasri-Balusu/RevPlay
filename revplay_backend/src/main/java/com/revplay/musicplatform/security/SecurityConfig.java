@@ -70,14 +70,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow the S3 website origin
-        configuration.setAllowedOrigins(Arrays.asList(
-            "http://revplay-ui.s3-website.ap-south-1.amazonaws.com",
-            "http://revplay-frontend-harshasri.s3-website.ap-south-1.amazonaws.com",
-            "http://localhost:4200"
-        ));
+        // Temporarily allow all origins during troubleshooting to eliminate CORS as a bottleneck
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
         
