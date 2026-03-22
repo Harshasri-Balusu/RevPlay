@@ -32,7 +32,7 @@ pipeline {
                 dir('revplay_frontend') {
                     // Update 'revhire-f' with the actual S3 bucket name if it's different.
                     // Also ensure the Jenkins EC2 has AWS credentials configured (IAM role attached).
-                    sh 'aws s3 sync dist/revplay-ui s3://revhire-f --delete || aws s3 sync dist s3://revhire-f --delete'
+                    sh '/snap/bin/aws s3 sync dist/revplay-ui s3://revhire-f --delete || /snap/bin/aws s3 sync dist s3://revhire-f --delete'
                 }
             }
         }
