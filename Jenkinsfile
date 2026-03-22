@@ -20,6 +20,7 @@ pipeline {
             steps {
                 dir('revplay_frontend') {
                     sh '''
+                    export NODE_OPTIONS=--max-old-space-size=512
                     npm install
                     npm run build
                     '''
