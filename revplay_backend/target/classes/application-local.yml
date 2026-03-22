@@ -1,0 +1,18 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: balusuharshasri2807@gmail.com
+    password: ucoovonyjqqegato
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          starttls:
+            enable: true

@@ -1,0 +1,40 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.restoreBackup
+.flattened-pom.xml
+dependency-reduced-pom.xml
+build.log
+.incremental/
+.polyglot.pom.yaml
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Node/Angular
+node_modules/
+dist/
+dist-app/
+.angular/
+.npm/
+
+# Logs
+*.log
+app.log
+manual_test.log
+
+# Temporary Test Files
+register.json
+test_register.sh
+revplay.service
+
+# OS
+.DS_Store
+Thumbs.db

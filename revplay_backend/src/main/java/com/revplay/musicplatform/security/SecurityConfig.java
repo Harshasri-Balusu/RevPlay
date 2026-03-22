@@ -35,6 +35,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // CORS preflight (OPTIONS) must be permitted; POST /login alone does not cover OPTIONS
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Explicitly permit public authentication endpoints
                         .requestMatchers(HttpMethod.POST,
                                 "/api/v1/auth/register",
@@ -73,8 +75,10 @@ public class SecurityConfig {
         // Temporarily allow all origins during troubleshooting to eliminate CORS as a bottleneck
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin"));
-        configuration.setAllowCredentials(true);
+        // Preflight may request arbitrary headers. "*" must not be combined with allowCredentials(true) — Spring
+        // rejects that pair ("Invalid CORS request"). JWT is sent in Authorization; cookies are not required.
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
