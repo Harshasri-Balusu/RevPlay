@@ -39,15 +39,15 @@ pipeline {
         }
 
         stage('Deploy Backend to EC2') {
-    steps {
-        dir('revplay_backend') {
-            sh '''
-            scp -o StrictHostKeyChecking=no target/musicplatform-0.0.1-SNAPSHOT.jar ubuntu@3.7.137.29:/home/ubuntu/
-            ssh -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "pkill -f musicplatform || true"
-            ssh -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "nohup java -jar /home/ubuntu/musicplatform-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
-            '''
+            steps {
+                dir('revplay_backend') {
+                    sh '''
+                    scp -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no target/musicplatform-0.0.1-SNAPSHOT.jar ubuntu@3.7.137.29:/home/ubuntu/
+                    ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "pkill -f musicplatform || true"
+                    ssh -i /home/ubuntu/revplay-key1.pem -o StrictHostKeyChecking=no ubuntu@3.7.137.29 "nohup java -jar /home/ubuntu/musicplatform-0.0.1-SNAPSHOT.jar > app.log 2>&1 &"
+                    '''
+                }
+            }
         }
-    }
-}
     }
 }
