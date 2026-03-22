@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading, withHashLocation } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -9,7 +9,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(routes, withPreloading(PreloadAllModules), withHashLocation()),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
